@@ -61,7 +61,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The maximum length of {0} should be {1}!.
+        ///   Looks up a localized string similar to The maximum length of {0} must be {1}!.
         /// </summary>
         public static string MaxLength {
             get {
@@ -70,7 +70,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} value should be between {1} and {2}!.
+        ///   Looks up a localized string similar to The {0} value must be between {1} and {2}!.
         /// </summary>
         public static string Range {
             get {

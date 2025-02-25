@@ -7,8 +7,7 @@
 
 //try
 //{
-//	var roleName =
-//		$"Administrator";
+//	var roleName = $"Administrator";
 
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
@@ -35,12 +34,16 @@
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
 //}
 
 //public class Role(string name) : Entity

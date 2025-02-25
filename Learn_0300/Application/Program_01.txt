@@ -26,14 +26,14 @@ EF, EF Core نگاه = Code First
 
 [Role]					1...N					[User]
 [Guid] Id										Guid Id
-												[Guid] RoleId
+												[Guid] RoleId (Foriegn Key)
 IList<User> Users								Role Role
 
 EF, EF Core نگاه + Lazy Loading
 
 [Role]					1...N					[User]
 Guid Id											Guid Id
-												Guid RoleId
+												[Guid] RoleId (Foriegn Key)
 virtual IList<User> Users						virtual Role Role
 **************************************************
 - Note: Users and Role are Navigation Properties

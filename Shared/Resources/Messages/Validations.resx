@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MaxLength" xml:space="preserve">
-    <value>The maximum length of {0} should be {1}!</value>
+    <value>The maximum length of {0} must be {1}!</value>
   </data>
   <data name="Range" xml:space="preserve">
-    <value>The {0} value should be between {1} and {2}!</value>
+    <value>The {0} value must be between {1} and {2}!</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>You did not specify {0}!</value>

@@ -9,8 +9,7 @@
 
 //try
 //{
-//	var roleName =
-//		$"Administrator";
+//	var roleName = $"Administrator";
 
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
@@ -21,8 +20,7 @@
 
 //		if (hasAnyRole == false)
 //		{
-//			var newRole =
-//				new Role(name: roleName);
+//			var newRole = new Role(name: roleName);
 
 //			applicationDbContext.Add(entity: newRole);
 
@@ -41,11 +39,8 @@
 
 //		if (foundRole is null)
 //		{
-//			var errorMessage =
-//				$"{roleName} role not found!";
-
+//			var errorMessage = $"{roleName} role not found!";
 //			Console.WriteLine(value: errorMessage);
-
 //			return;
 //		}
 
@@ -55,9 +50,7 @@
 
 //		if (hasAnyUser)
 //		{
-//			Console.WriteLine
-//				(value: $"The users has been already created!");
-
+//			Console.WriteLine(value: $"The users has been already created!");
 //			return;
 //		}
 
@@ -74,8 +67,7 @@
 //				RoleId = foundRole.Id,
 //			};
 
-//		entityEntry =
-//			applicationDbContext.Add(entity: newUser);
+//		entityEntry = applicationDbContext.Add(entity: newUser);
 //		// /Solution (1)
 
 //		// Solution (2)
@@ -85,8 +77,7 @@
 //				Role = foundRole,
 //			};
 
-//		entityEntry =
-//			applicationDbContext.Add(entity: newUser);
+//		entityEntry = applicationDbContext.Add(entity: newUser);
 //		// /Solution (2)
 
 //		// Solution (3)
@@ -100,8 +91,7 @@
 //			await
 //			applicationDbContext.SaveChangesAsync();
 
-//		Console.WriteLine
-//			(value: $"{nameof(affectedRows)}: {affectedRows}");
+//		Console.WriteLine(value: $"{nameof(affectedRows)}: {affectedRows}");
 //		// **************************************************
 //	}
 //}
@@ -112,12 +102,16 @@
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
 //}
 
 //public class Role(string name) : Entity
@@ -138,12 +132,23 @@
 //	public Guid RoleId { get; set; }
 
 //	public virtual Role? Role { get; set; }
-//	//public virtual Role Role { get; set; }
 
 //	[MaxLength(length: 20)]
 //	[Required(AllowEmptyStrings = false)]
 //	public string Username { get; set; } = username;
 //}
+
+////public class User(Role role, string username) : Entity
+////{
+////	[Required]
+////	public Guid RoleId { get; set; }
+
+////	public virtual Role Role { get; set; } = role;
+
+////	[MaxLength(length: 20)]
+////	[Required(AllowEmptyStrings = false)]
+////	public string Username { get; set; } = username;
+////}
 
 //internal class RoleConfiguration : object, IEntityTypeConfiguration<Role>
 //{

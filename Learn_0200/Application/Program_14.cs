@@ -1,4 +1,5 @@
-﻿//using System;
+﻿//using Dtat;
+//using System;
 //using Resources;
 //using Resources.Messages;
 //using Microsoft.EntityFrameworkCore;
@@ -25,15 +26,15 @@
 //{
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
-//	//[Range(minimum: 1, maximum: 10_000)]
+//	//[Range(minimum: 1, maximum: 100_000)]
 
-//	//[Range(minimum: 1, maximum: 10_000,
-//	//	ErrorMessage = "The Ordering value must be between 1 and 10,000!")]
+//	//[Range(minimum: 1, maximum: 100_000,
+//	//	ErrorMessage = "The Ordering value must be between 1 and 100,000!")]
 
-//	[Range(minimum: 1, maximum: 10_000, ErrorMessage =
-//		"The {0} value must be between {1} and {2}!")]
+//	[Range(minimum: 1, maximum: 100_000,
+//		ErrorMessage = "The {0} value must be between {1} and {2}!")]
 
 //	// و البته روش حرفه‌ای‌تر و هیجان‌انگیزتری که در ادامه خواهیم دید
 //	public int Ordering { get; set; } = 10_000;
@@ -66,6 +67,11 @@
 
 //	//[Display(Name = "شناسه")]
 
+//	// با تشکر از خانم نادیا داوری
+//	// Select .resx File:
+//	//		Properties
+//	//			Custom Tool: PublicResXFileCodeGenerator
+
 //	//[Display(ResourceType = typeof(DataDictionary), Name = "Id")]
 
 //	// سوتی می‌دهم
@@ -75,11 +81,12 @@
 //	[DatabaseGenerated(DatabaseGeneratedOption.None)]
 //	[Display(ResourceType = typeof(DataDictionary),
 //		Name = nameof(DataDictionary.Id))]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[Display(ResourceType = typeof(DataDictionary),
 //		Name = nameof(DataDictionary.Ordering))]
-//	[Range(minimum: 1, maximum: 10_000,
+//	[Range(minimum: Constant.Range.OrderingMinimum,
+//		maximum: Constant.Range.OrderingMaximum,
 //		ErrorMessageResourceType = typeof(Validations),
 //		ErrorMessageResourceName = nameof(Validations.Range))]
 //	public int Ordering { get; set; } = 10_000;
@@ -89,21 +96,21 @@
 //	[Required(AllowEmptyStrings = false,
 //		ErrorMessageResourceType = typeof(Validations),
 //		ErrorMessageResourceName = nameof(Validations.Required))]
-//	[MaxLength(length: 20,
+//	[MaxLength(length: Constant.MaxLength.Username,
 //		ErrorMessageResourceType = typeof(Validations),
 //		ErrorMessageResourceName = nameof(Validations.MaxLength))]
 //	public string Username { get; set; } = username;
 
 //	[Display(ResourceType = typeof(DataDictionary),
 //		Name = nameof(DataDictionary.LastName))]
-//	[MaxLength(length: 30,
+//	[MaxLength(length: Constant.MaxLength.LastName,
 //		ErrorMessageResourceType = typeof(Validations),
 //		ErrorMessageResourceName = nameof(Validations.MaxLength))]
 //	public string? LastName { get; set; }
 
 //	[Display(ResourceType = typeof(DataDictionary),
 //		Name = nameof(DataDictionary.FirstName))]
-//	[MaxLength(length: 20,
+//	[MaxLength(length: Constant.MaxLength.FirstName,
 //		ErrorMessageResourceType = typeof(Validations),
 //		ErrorMessageResourceName = nameof(Validations.MaxLength))]
 //	public string? FirstName { get; set; }
@@ -118,17 +125,18 @@
 //	{
 //		Database.EnsureCreated();
 //	}
+
 //	public DbSet<User01> Users_01 { get; set; }
 //	public DbSet<User02> Users_02 { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 //	protected override void OnModelCreating(ModelBuilder modelBuilder)
 //	{

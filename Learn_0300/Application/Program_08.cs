@@ -7,8 +7,7 @@
 //using System.ComponentModel.DataAnnotations.Schema;
 //using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-//var roleName =
-//	$"Administrator";
+//var roleName = $"Administrator";
 
 //try
 //{

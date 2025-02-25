@@ -10,6 +10,17 @@ public static class Constant : object
 
 		//public int Name = 100; // کار نمی‌کند
 		//public static int Name = 100; // کار نمی‌کند
+
+		public const int Username = 20;
+		public const int LastName = 30;
+		public const int FullName = 50;
+		public const int FirstName = 20;
+	}
+
+	public static class Range : object
+	{
+		public const int OrderingMinimum = 1;
+		public const int OrderingMaximum = 100_000;
 	}
 
 	public static class RegularExpression : object
