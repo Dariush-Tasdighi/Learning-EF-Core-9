@@ -20,9 +20,7 @@
 
 //		if (hasAnyUser)
 //		{
-//			Console.WriteLine
-//				(value: $"Please Delete Database First!");
-
+//			Console.WriteLine(value: "Please Delete Database First!");
 //			return;
 //		}
 
@@ -30,8 +28,7 @@
 //		UserProfile newUserProfile;
 
 //		// **************************************************
-//		newUser =
-//			new User(username: username1);
+//		newUser = new User(username: username1);
 
 //		applicationDbContext.Add(entity: newUser);
 //		// **************************************************
@@ -39,8 +36,7 @@
 //		// **************************************************
 //		// In DDD: Bad Practice!
 //		// **************************************************
-//		newUser =
-//			new User(username: username2);
+//		newUser = new User(username: username2);
 
 //		newUserProfile =
 //			new UserProfile(fullName: "Full Name (2)")
@@ -58,8 +54,7 @@
 //		// **************************************************
 //		// In DDD: Bad Practice!
 //		// **************************************************
-//		newUser =
-//			new User(username: username3);
+//		newUser = new User(username: username3);
 
 //		newUserProfile =
 //			new UserProfile(fullName: "Full Name (3)")
@@ -72,11 +67,8 @@
 //		// **************************************************
 
 //		// **************************************************
-//		newUser =
-//			new User(username: username4);
-
-//		newUserProfile =
-//			new UserProfile(fullName: "Full Name (4)");
+//		newUser = new User(username: username4);
+//		newUserProfile = new UserProfile(fullName: "Full Name (4)");
 
 //		newUser.Profile = newUserProfile;
 
@@ -87,8 +79,7 @@
 //			await
 //			applicationDbContext.SaveChangesAsync();
 
-//		Console.WriteLine
-//			(value: $"{nameof(affectedRows)}: {affectedRows}");
+//		Console.WriteLine(value: $"{nameof(affectedRows)}: {affectedRows}");
 //	}
 //}
 //catch (Exception ex)
@@ -98,12 +89,16 @@
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
 //}
 
 //public class User(string username) : Entity

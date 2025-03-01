@@ -9,10 +9,8 @@
 
 //try
 //{
-//	var username =
-//		$"DariushTasdighi";
-
 //	var groupName = "Managers";
+//	var username = "DariushTasdighi";
 
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
@@ -23,8 +21,7 @@
 
 //		if (hasAnyUser == false)
 //		{
-//			var newUser =
-//				new User(username: username);
+//			var newUser = new User(username: username);
 
 //			applicationDbContext.Add(entity: newUser);
 
@@ -37,8 +34,7 @@
 
 //		if (hasAnyGroup == false)
 //		{
-//			var newGroup =
-//				new Group(name: groupName);
+//			var newGroup = new Group(name: groupName);
 
 //			applicationDbContext.Add(entity: newGroup);
 
@@ -57,9 +53,7 @@
 
 //		if (theUser is null)
 //		{
-//			Console.WriteLine
-//				(value: $"There is not the {username} user!");
-
+//			Console.WriteLine(value: $"There is not the {username} user!");
 //			return;
 //		}
 
@@ -71,9 +65,7 @@
 
 //		if (theGroup is null)
 //		{
-//			Console.WriteLine
-//				(value: $"There is not the {groupName} group!");
-
+//			Console.WriteLine(value: $"There is not the {groupName} group!");
 //			return;
 //		}
 
@@ -85,8 +77,7 @@
 //			await
 //			applicationDbContext.SaveChangesAsync();
 
-//		Console.WriteLine
-//			(value: $"{nameof(affectedRows)}: {affectedRows}");
+//		Console.WriteLine(value: $"{nameof(affectedRows)}: {affectedRows}");
 //	}
 //}
 //catch (Exception ex)
@@ -98,10 +89,10 @@
 //{
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
 //}
 
 //public class User(string username) : Entity
@@ -210,6 +201,10 @@
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
+//		//optionsBuilder
+//		//	.UseSqlServer(connectionString: connectionString)
+//		//	;
+
 //		// New!
 //		//optionsBuilder
 //		//	.LogTo(e => Debug.WriteLine(e))
@@ -229,11 +224,7 @@
 //		//	.LogTo(action: Console.WriteLine)
 //		//	;
 
-//		//optionsBuilder
-//		//	.UseSqlServer(connectionString: connectionString)
-//		//	;
-
-//		// [OR]
+//		// New!
 //		optionsBuilder
 //			.LogTo(action: Console.WriteLine)
 //			.UseSqlServer(connectionString: connectionString)

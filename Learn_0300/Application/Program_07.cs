@@ -6,7 +6,7 @@
 
 //try
 //{
-//	var username = $"Dariush Tasdighi";
+//	var username = "Dariush Tasdighi";
 
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
@@ -17,14 +17,11 @@
 
 //		if (hasAnyUser)
 //		{
-//			Console.WriteLine
-//				(value: $"Please Delete Database First!");
-
+//			Console.WriteLine(value: $"Please Delete Database First!");
 //			return;
 //		}
 
-//		var newUser =
-//			new User(username: username);
+//		var newUser = new User(username: username);
 
 //		applicationDbContext.Add(entity: newUser);
 
@@ -32,8 +29,7 @@
 //			await
 //			applicationDbContext.SaveChangesAsync();
 
-//		Console.WriteLine
-//			(value: $"{nameof(affectedRows)}: {affectedRows}");
+//		Console.WriteLine(value: $"{nameof(affectedRows)}: {affectedRows}");
 //	}
 //}
 //catch (Exception ex)
@@ -43,12 +39,16 @@
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
 //}
 
 //public class User(string username) : Entity

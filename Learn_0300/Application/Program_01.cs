@@ -121,9 +121,9 @@
 //	public string Name { get; set; } = name;
 
 //	//public virtual IList<User>? Users { get; set; } // Bad Practice!
-//	//public virtual IList<User>? Users { get; }
+//	//public virtual IList<User>? Users { get; } // Bad Practice!
 //	//public virtual IList<User> Users { get; } = new List<User>();
-//	public virtual IList<User> Users { get; } = [];
+//	public virtual IList<User> Users { get; } = []; // Best Practice
 //}
 
 //public class User(string username) : Entity
@@ -138,12 +138,17 @@
 //	public string Username { get; set; } = username;
 //}
 
-////public class User(Role role, string username) : Entity
+///// <summary>
+///// روش اصولی به شکل ذیل است، ولی اگر به شکل ذیل
+///// بنویسیم، هر سه حالت باحالی که در قسمت بالای سورس‌کد
+///// نوشته‌ایم، کار نخواهند کرد
+///// </summary>
+////public class User(Guid roleId, string username) : Entity
 ////{
 ////	[Required]
-////	public Guid RoleId { get; set; }
+////	public Guid RoleId { get; set; } = roleId;
 
-////	public virtual Role Role { get; set; } = role;
+////	public virtual Role? Role { get; set; }
 
 ////	[MaxLength(length: 20)]
 ////	[Required(AllowEmptyStrings = false)]
@@ -163,6 +168,7 @@
 //			.IsClustered(clustered: false)
 //			;
 
+//		// Alternate Key
 //		builder
 //			.HasIndex(current => new { current.Name })
 //			.IsUnique(unique: true)
@@ -188,6 +194,7 @@
 //			.IsUnicode(unicode: false)
 //			;
 
+//		// Alternate Key
 //		builder
 //			.HasIndex(current => new { current.Username })
 //			.IsUnique(unique: true)

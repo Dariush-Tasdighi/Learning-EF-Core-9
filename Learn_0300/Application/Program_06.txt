@@ -2,6 +2,6 @@
 
 Best Practice!
 
-User (1)		(0...1) UserProfile
+User (1)		(0..1) UserProfile
 
 خیلی خوشایند نبود EF این رابطه در
