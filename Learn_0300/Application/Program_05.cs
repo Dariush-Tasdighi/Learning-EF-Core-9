@@ -87,6 +87,10 @@
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 //	public Guid Id { get; init; } = Guid.NewGuid();
@@ -136,32 +140,39 @@
 //			.IsUnique(unique: true)
 //			;
 
+//		//[User]	[UsersInGroups]		[Group]
+
 //		builder
 //			.HasMany(current => current.Groups)
 //			.WithMany(other => other.Users)
 //			.UsingEntity
 //			(
-//				"UsersInGroups",
+//				joinEntityName: "UsersInGroups",
 //				// ترتیب نوشتن دو دستور ذیل، بینهایت اهمیت دارد
 //				// نزدیک در نزدیک - دور در دور
-//				left => left.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId").HasPrincipalKey(nameof(Group.Id)),
-//				right => right.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)),
-//				join => join.HasKey("GroupId", "UserId")
+//				configureRight: right => right.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId").HasPrincipalKey(nameof(Group.Id)),
+//				configureLeft: left => left.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)),
+//				configureJoinEntityType: join => join.HasKey("UserId", "GroupId")
 //			);
 
 //		// نکته: دو دستور ذیل با هم فرق می‌کنند
 //		//join => join.HasKey("GroupId", "UserId")
 //		//join => join.HasKey("UserId", "GroupId")
 
-//		// اگر بخواهیم به صورت ساده‌ای بنویسیم که در اکثر مواقع کار کند
+//		// با فرض این‌که، همه جداول، یک فیلد به نام دقیقا
+//		// Id
+//		// دارد، می‌توانیم به جای دستور فوق، از دستور ذیل استفاده نماییم
 //		//builder
 //		//	.HasMany(current => current.Groups)
 //		//	.WithMany(other => other.Users)
 //		//	.UsingEntity
 //		//	(
-//		//		"UsersInGroups",
-//		//		left => left.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId"),
-//		//		right => right.HasOne(typeof(User)).WithMany().HasForeignKey("UserId")
+//		//		joinEntityName: "UsersInGroups",
+//		//		// ترتیب نوشتن دو دستور ذیل، بینهایت اهمیت دارد
+//		//		// نزدیک در نزدیک - دور در دور
+//		//		configureRight: right => right.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId"),
+//		//		configureLeft: left => left.HasOne(typeof(User)).WithMany().HasForeignKey("UserId"),
+//		//		configureJoinEntityType: join => join.HasKey("UserId", "GroupId")
 //		//	);
 //	}
 //}
@@ -201,10 +212,13 @@
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
+//		// **************************************************
 //		//optionsBuilder
 //		//	.UseSqlServer(connectionString: connectionString)
 //		//	;
+//		// **************************************************
 
+//		// **************************************************
 //		// New!
 //		//optionsBuilder
 //		//	.LogTo(e => Debug.WriteLine(e))

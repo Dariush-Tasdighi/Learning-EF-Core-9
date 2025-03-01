@@ -199,11 +199,8 @@
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		//optionsBuilder
-//		//	.LogTo(action: Console.WriteLine)
-//		//	;
-
 //		optionsBuilder
+//			//.LogTo(action: Console.WriteLine)
 //			.UseSqlServer(connectionString: connectionString)
 //			;
 //	}

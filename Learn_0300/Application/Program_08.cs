@@ -16,12 +16,14 @@
 
 //	using var applicationDbContext = new ApplicationDbContext();
 
+//	// Lazy Loading
 //	var foundRole =
 //		await
 //		applicationDbContext.Roles
 //		.Where(current => current.Name.ToLower() == roleName.ToLower())
 //		.FirstOrDefaultAsync();
 
+//	// Eager Loading
 //	//var foundRole =
 //	//	await
 //	//	applicationDbContext.Roles
@@ -31,11 +33,9 @@
 
 //	if (foundRole is not null)
 //	{
-//		var userCount =
-//			foundRole.Users.Count();
+//		var userCount = foundRole.Users.Count();
 
-//		Console.WriteLine
-//			(value: $"User Count: {userCount}");
+//		Console.WriteLine(value: $"User Count: {userCount}");
 //	}
 //}
 //catch (Exception ex)
@@ -56,8 +56,7 @@
 //		return;
 //	}
 
-//	var newRole =
-//		new Role(name: roleName);
+//	var newRole = new Role(name: roleName);
 
 //	applicationDbContext.Add(entity: newRole);
 
@@ -65,8 +64,7 @@
 //		await
 //		applicationDbContext.SaveChangesAsync();
 
-//	Console.WriteLine
-//		(value: $"Role - {nameof(affectedRows)}: {affectedRows}");
+//	Console.WriteLine(value: $"Role - {nameof(affectedRows)}: {affectedRows}");
 //}
 
 //async Task CreateTheUsersAsync()
@@ -81,11 +79,8 @@
 
 //	if (foundRole is null)
 //	{
-//		var errorMessage =
-//			$"{roleName} role not found!";
-
+//		var errorMessage = $"{roleName} role not found!";
 //		Console.WriteLine(value: errorMessage);
-
 //		return;
 //	}
 
@@ -128,18 +123,21 @@
 //		await
 //		applicationDbContext.SaveChangesAsync();
 
-//	Console.WriteLine
-//		(value: $"Users - {nameof(affectedRows)}: {affectedRows}");
+//	Console.WriteLine(value: $"Users - {nameof(affectedRows)}: {affectedRows}");
 //}
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
 //}
 
 //public class Role(string name) : Entity

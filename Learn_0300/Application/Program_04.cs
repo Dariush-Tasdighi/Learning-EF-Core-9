@@ -8,8 +8,8 @@
 
 //try
 //{
+//	var username = "Dariush";
 //	var groupName = "Managers";
-//	var username = "DariushTasdighi";
 
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
@@ -88,6 +88,10 @@
 
 //public abstract class Entity : object
 //{
+//	protected Entity() : base()
+//	{
+//	}
+
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 //	public Guid Id { get; init; } = Guid.NewGuid();

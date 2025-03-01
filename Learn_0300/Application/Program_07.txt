@@ -8,21 +8,21 @@ public string? Description { get; set; }
 
 بهتر است جنس فیلدها را توصیف کنیم = Cross Platform
 
-Note: The row / record limit in bytes for Microsoft SQL Server is 8,060
+Note: The row / record limit in Microsoft SQL Server is 8,060 Bytes
 
 SQL Server ذخیره‌سازی رشته‌ها/متن در:
 
 - Speed Optimized!
 
 										Size
-char				10		Ali.......	10 Byes
-nchar				10		علی.......	20 Byes
+char				10		Ali.......	10 Bytes
+nchar				10		علی.......	20 Bytes
 
 - Space Optimized!
 
 										Size
-varchar				10		Ali			3 Byes
-nvarchar			10		علی			6 Byes
+varchar				10		Ali			3 Bytes
+nvarchar			10		علی			6 Bytes
 
 text	(Obsolite)	2^31 - 1 Bytes
 ntext	(Obsolite)	2^30 - 1 Bytes (برای فارسی)
