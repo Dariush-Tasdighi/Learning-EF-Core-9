@@ -1,12 +1,12 @@
 ﻿using Domain;
 using System;
 using ViewModels;
+using Application;
+using System.Data;
 using System.Linq;
 using Application.Persistence;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
-using Application;
 
 try
 {
@@ -200,9 +200,8 @@ try
 
 		// "SELECT * FROM Countries WHERE Name LIKE '%علی علوی%'"
 
-		search =
-			search.Replace
-			(oldValue: " ", newValue: "%"); // "علی%علوی"
+		// "علی%علوی"
+		search = search.Replace(oldValue: " ", newValue: "%");
 
 		// "SELECT * FROM Countries WHERE Name LIKE '%علی%علوی%'"
 	}
@@ -223,6 +222,10 @@ try
 	// **************************************************
 	{
 		var search = "علی علوی";
+
+		// "علی%علوی"
+		// خوشبختانه! کار نمی‌کند
+		//search = search.Replace(oldValue: " ", newValue: "%");
 
 		var countries =
 			await
@@ -431,6 +434,27 @@ try
 
 	// **************************************************
 	{
+		//var states =
+		//	await
+		//	applicationDbContext.States
+		//	.Where(current => current.Country.Code == 1)
+		//	.ToListAsync()
+		//	;
+
+		//var states =
+		//	await
+		//	applicationDbContext.States
+		//	.Where(current => current.Country is not null &&  current.Country.Code == 1)
+		//	.ToListAsync()
+		//	;
+
+		//var states =
+		//	await
+		//	applicationDbContext.States
+		//	.Where(current => current.Country != null && current.Country.Code == 1)
+		//	.ToListAsync()
+		//	;
+
 		var states =
 			await
 			applicationDbContext.States
@@ -714,15 +738,15 @@ try
 
 		if (city is not null)
 		{
-			var stateName =
-				city.State?.Name;
-
 			// کد قدیمی
 			//string? stateName = null;
 			//if (city.State is not null)
 			//{
 			//	stateName = city.State.Name;
 			//}
+
+			var stateName =
+				city.State?.Name;
 		}
 	}
 	// **************************************************
@@ -846,6 +870,7 @@ try
 
 	// **************************************************
 	// صورت مساله
+	//
 	// من همه کشورهايی را می‌خواهم که
 	// لااقل در نام يکی از استان‌های آن، حرف {بی} وجود داشته باشد
 	// لااقل = Any
@@ -902,6 +927,7 @@ try
 
 	// **************************************************
 	// صورت مساله
+	//
 	// من همه کشورهايی را می‌خواهم که
 	// در لااقل نام يکی از شهرهای آن، حرف {بی} وجود داشته باشد
 	// **************************************************
@@ -922,6 +948,7 @@ try
 
 	// **************************************************
 	// صورت مساله
+	//
 	// من همه شهرهایی را می‌خواهم که
 	// جمعیت کشورشان بیش از ده میلیون نفر باشد
 	// **************************************************
@@ -934,7 +961,8 @@ try
 			// نيست
 			//.Include(current => current.State)
 			//.Include(current => current.State.Country)
-			//.Where(current => current.State.Country.Population >= 10_000_000)
+			//.Where(current => current.State.Country.Population >= 10000000)
+			//.Where(current => current.State!.Country!.Population >= 10000000)
 			.Where(current => current.State!.Country!.Population >= 10_000_000)
 			.ToListAsync()
 			;
@@ -1028,7 +1056,34 @@ try
 	// **************************************************
 
 	// **************************************************
-	// Dynamic Search:
+	// Dynamic Search
+	//
+	//
+	//	State(1)
+	//
+	//Name: _____
+	//
+	//[Search]-> 2 States
+	//
+	//State(2)
+	//
+	//Name: _____
+	//Code: _____
+	//
+	//[Search]-> 4 States
+	//
+	//State(3)
+	//
+	//Name: __________
+	//Code From: _____
+	//Code To: _____
+	//
+	//[Search]-> 8 States
+	//
+	//State(N)->N = 10
+	//
+	//			10
+	//[Search]-> 2   States
 	// **************************************************
 	{
 		// **************************************************
@@ -1272,8 +1327,7 @@ try
 
 		foreach (var currentCountry in data)
 		{
-			Console.WriteLine
-				(value: currentCountry.Name);
+			Console.WriteLine(value: currentCountry.Name);
 		}
 	}
 	// **************************************************
@@ -1289,6 +1343,11 @@ try
 			.OrderBy(current => current.Name)
 			.ToListAsync()
 			;
+
+		foreach (var currentCountry in data)
+		{
+			Console.WriteLine(value: currentCountry.Name);
+		}
 	}
 	// **************************************************
 
@@ -1306,8 +1365,7 @@ try
 
 		foreach (var currentCountryName in data)
 		{
-			Console.WriteLine
-				(value: currentCountryName);
+			Console.WriteLine(value: currentCountryName);
 		}
 	}
 	// **************************************************
