@@ -7,23 +7,17 @@ public class ApplicationDbContext : DbContext
 {
 	public ApplicationDbContext() : base()
 	{
-		Database.Migrate();
-		//Database.EnsureCreated();
+		//Database.Migrate();
+		Database.EnsureCreated();
 	}
 
 	public ApplicationDbContext(DbContextOptions options) : base(options: options)
 	{
-		Database.Migrate();
-		//Database.EnsureCreated();
+		//Database.Migrate();
+		Database.EnsureCreated();
 	}
 
 	public DbSet<Country> Countries { get; set; }
-
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		modelBuilder.ApplyConfigurationsFromAssembly
-			(assembly: typeof(ApplicationDbContext).Assembly);
-	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
@@ -37,5 +31,11 @@ public class ApplicationDbContext : DbContext
 				.UseSqlServer(connectionString: connectionString)
 				;
 		}
+	}
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.ApplyConfigurationsFromAssembly
+			(assembly: typeof(ApplicationDbContext).Assembly);
 	}
 }

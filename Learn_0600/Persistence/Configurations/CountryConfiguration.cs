@@ -9,33 +9,33 @@ internal sealed class CountryConfiguration : object, IEntityTypeConfiguration<Co
 	public void Configure(EntityTypeBuilder<Country> builder)
 	{
 		// **************************************************
-		//builder
-		//	.HasIndex(current => new { current.Name })
-		//	.IsUnique(unique: true)
-		//	;
-
 		builder
-			.HasIndex(current => new { current.NewName })
+			.HasIndex(current => new { current.Name })
 			.IsUnique(unique: true)
 			;
+
+		//builder
+		//	.HasIndex(current => new { current.NewName })
+		//	.IsUnique(unique: true)
+		//	;
 		// **************************************************
 
 		// **************************************************
 		for (var index = 1; index <= 5; index++)
 		{
-			//var data =
-			//	new Country(name: $"Country {index}")
-			//	{
-			//		Id = index,
-			//		Code = index,
-			//	};
-
 			var data =
-				new Country(newName: $"Country {index}")
+				new Country(name: $"Country {index}")
 				{
 					Id = index,
 					Code = index,
 				};
+
+			//var data =
+			//	new Country(newName: $"Country {index}")
+			//	{
+			//		Id = index,
+			//		Code = index,
+			//	};
 
 			builder.HasData(data: data);
 		}
