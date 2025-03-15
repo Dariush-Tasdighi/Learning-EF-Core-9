@@ -9,5 +9,5 @@ public abstract class BaseSearchService : object
 		ApplicationDbContext = applicationDbContext;
 	}
 
-	public ApplicationDbContext ApplicationDbContext { get; }
+	public ApplicationDbContext ApplicationDbContext { get; init; }
 }

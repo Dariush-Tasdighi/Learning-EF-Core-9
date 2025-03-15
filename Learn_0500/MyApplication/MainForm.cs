@@ -35,8 +35,7 @@ public partial class MainForm : Form
 
 	public async void Search()
 	{
-		var pageSize =
-			Convert.ToInt32(pageSizeComboBox.SelectedItem);
+		var pageSize =			Convert.ToInt32(pageSizeComboBox.SelectedItem);
 
 		var request =
 			new CountriesSearchRequest
@@ -53,8 +52,7 @@ public partial class MainForm : Form
 		var searchService =
 			new CountriesSearchService(applicationDbContext: applicationDbContext);
 
-		var response =
-			await searchService.SearchAsync(request: request);
+		var response = await searchService.SearchAsync(request: request);
 
 		PageCount = response.PageCount;
 

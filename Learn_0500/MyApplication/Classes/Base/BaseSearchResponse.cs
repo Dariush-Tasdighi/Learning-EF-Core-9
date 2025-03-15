@@ -9,5 +9,5 @@ public class BaseSearchResponse<T> : object
 	public int PageIndex { get; set; }
 	public int PageCount { get; set; }
 	public int RecordCount { get; set; }
-	public IList<T> List { get; set; } = new List<T>();
+	public IList<T> List { get; set; } = [];
 }

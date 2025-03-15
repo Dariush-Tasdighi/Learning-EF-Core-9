@@ -11,8 +11,7 @@ public class CountriesSearchService : BaseSearchService
 	{
 	}
 
-	public async Task<BaseSearchResponse<Country>>
-		SearchAsync(CountriesSearchRequest request)
+	public async Task<BaseSearchResponse<Country>> SearchAsync(CountriesSearchRequest request)
 	{
 		var query =
 			ApplicationDbContext.Countries
@@ -21,22 +20,21 @@ public class CountriesSearchService : BaseSearchService
 
 		if (string.IsNullOrWhiteSpace(value: request.Name) == false)
 		{
-			query = query.Where(current =>
-				current.Name.ToLower().Contains(request.Name.ToLower()));
+			var name = request.Name.ToLower();
+
+			query = query.Where(current => current.Name.ToLower().Contains(name));
 		}
 
 		if (string.IsNullOrWhiteSpace(value: request.CodeFrom) == false)
 		{
-			var codeFrom =
-				Convert.ToInt32(value: request.CodeFrom);
+			var codeFrom = Convert.ToInt32(value: request.CodeFrom);
 
 			query = query.Where(current => current.Code >= codeFrom);
 		}
 
 		if (string.IsNullOrWhiteSpace(value: request.CodeTo) == false)
 		{
-			var codeTo =
-				Convert.ToInt32(value: request.CodeTo);
+			var codeTo = Convert.ToInt32(value: request.CodeTo);
 
 			query = query.Where(current => current.Code <= codeTo);
 		}

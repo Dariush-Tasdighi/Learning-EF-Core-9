@@ -21,11 +21,14 @@ internal sealed class CountryConfiguration : object, IEntityTypeConfiguration<Co
 		// **************************************************
 
 		// **************************************************
-		for (var index = 1; index <= 1000; index++)
+		// Seed Data
+		// **************************************************
+		for (var index = 1; index <= 1_000; index++)
 		{
 			var data =
 				new Country(name: $"Country {index}")
 				{
+					// Id is Identity!
 					Id = index,
 					Code = index,
 				};

@@ -9,5 +9,5 @@ public abstract class Entity : object
 	}
 
 	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
-	public int Id { get; set; }
+	public int Id { get; init; }
 }

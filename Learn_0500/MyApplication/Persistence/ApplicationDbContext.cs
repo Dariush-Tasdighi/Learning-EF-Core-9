@@ -12,12 +12,6 @@ public class ApplicationDbContext : DbContext
 
 	public DbSet<Country> Countries { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		modelBuilder.ApplyConfigurationsFromAssembly
-			(assembly: typeof(ApplicationDbContext).Assembly);
-	}
-
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
 		var connectionString =
@@ -27,5 +21,11 @@ public class ApplicationDbContext : DbContext
 			.UseLazyLoadingProxies()
 			.UseSqlServer(connectionString: connectionString)
 			;
+	}
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.ApplyConfigurationsFromAssembly
+			(assembly: typeof(ApplicationDbContext).Assembly);
 	}
 }
