@@ -21,6 +21,8 @@ internal sealed class CountryConfiguration : object, IEntityTypeConfiguration<Co
 		// **************************************************
 
 		// **************************************************
+		// Seed Data
+		// **************************************************
 		for (var index = 1; index <= 5; index++)
 		{
 			var data =
