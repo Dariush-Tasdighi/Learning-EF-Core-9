@@ -7,7 +7,7 @@
 //using System.ComponentModel.DataAnnotations.Schema;
 //using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-//var roleName = $"Administrator";
+//var roleName = "Administrator";
 
 //try
 //{
@@ -146,6 +146,9 @@
 //	[Required(AllowEmptyStrings = false)]
 //	public string Name { get; set; } = name;
 
+//	/// <summary>
+//	/// (3)
+//	/// </summary>
 //	public virtual IList<User> Users { get; } = [];
 //}
 
@@ -155,6 +158,7 @@
 //	public Guid RoleId { get; set; }
 
 //	/// <summary>
+//	/// (3)
 //	/// Note: Error in Lazy Loading!
 //	/// Property 'User.Role' is not virtual
 //	/// </summary>
@@ -242,9 +246,9 @@
 //		//	.UseSqlServer(connectionString: connectionString)
 //		//	;
 
-//		// Note: Install NuGet:
-//		// Microsoft.EntityFrameworkCore.Proxies
+//		// Note: (1) Install NuGet: Microsoft.EntityFrameworkCore.Proxies
 //		optionsBuilder
+//			// (2)
 //			.UseLazyLoadingProxies()
 //			.UseSqlServer(connectionString: connectionString)
 //			;

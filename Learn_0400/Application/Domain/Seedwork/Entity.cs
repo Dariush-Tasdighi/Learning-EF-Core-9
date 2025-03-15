@@ -2,6 +2,9 @@
 
 namespace Domain.Seedwork;
 
+/// <summary>
+/// Eric Evans
+/// </summary>
 public abstract class Entity : object
 {
 	protected Entity() : base()

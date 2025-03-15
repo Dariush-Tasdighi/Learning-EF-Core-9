@@ -30,7 +30,8 @@ try
 			;
 	}
 
-	// Below Command: Using just in WPF / Silverlight!
+	// Below Command: Using just in WPF / Silverlight (منسوخ)
+	//	-> Architecture: MVVM
 
 	{
 		// Load() -> using Microsoft.EntityFrameworkCore;
@@ -398,16 +399,15 @@ try
 
 	// **************************************************
 	// Optimization!
-	//
+	// **************************************************
 	// Loading Related Data:
 	//
 	// a) Not Loading!
 	// b) Lazy Loading!
 	// c) Eager Loading!
 	//
-	// User
-	//		(0..1) Company
-	//		(0..N) Children
+	// هدف: می‌خواهیم، تعداد استان‌های کشوری که کد آن یک است را بدست آوریم
+	// فرض می‌کنیم که تعداد استان‌های کشوری با کد یک، ده میلیون استان باشد
 	// **************************************************
 	{
 		var country =
@@ -444,7 +444,7 @@ try
 		//var states =
 		//	await
 		//	applicationDbContext.States
-		//	.Where(current => current.Country is not null &&  current.Country.Code == 1)
+		//	.Where(current => current.Country is not null && current.Country.Code == 1)
 		//	.ToListAsync()
 		//	;
 
@@ -504,7 +504,7 @@ try
 	// فاجعه
 	//
 	// فرض کنید که هر کشور
-	// به طور متوسط یک میلیون استان دارد
+	// به طور متوسط ده میلیون استان دارد
 	// **************************************************
 	{
 		var country =
@@ -590,7 +590,6 @@ try
 			.FirstOrDefaultAsync();
 
 		// در این حالت امکان بی‌دقتی وجود دارد
-
 		//var country =
 		//	await
 		//	applicationDbContext.Countries
@@ -745,8 +744,8 @@ try
 			//	stateName = city.State.Name;
 			//}
 
-			var stateName =
-				city.State?.Name;
+			// کد جدید / مدرن
+			var stateName = city.State?.Name;
 		}
 	}
 	// **************************************************
@@ -762,11 +761,8 @@ try
 
 		if (city is not null)
 		{
-			var stateName =
-				city.State?.Name;
-
-			var countryName =
-				city.State?.Country?.Name;
+			var stateName = city.State?.Name;
+			var countryName = city.State?.Country?.Name;
 		}
 	}
 	// **************************************************
@@ -783,11 +779,8 @@ try
 
 		if (city is not null)
 		{
-			var stateName =
-				city.State?.Name;
-
-			var countryName =
-				city.State?.Country?.Name;
+			var stateName = city.State?.Name;
+			var countryName = city.State?.Country?.Name;
 		}
 	}
 	// **************************************************
@@ -805,11 +798,8 @@ try
 
 		if (city is not null)
 		{
-			var stateName =
-				city.State?.Name;
-
-			var countryName =
-				city.State?.Country?.Name;
+			var stateName = city.State?.Name;
+			var countryName = city.State?.Country?.Name;
 		}
 	}
 	// **************************************************
@@ -833,11 +823,8 @@ try
 
 		if (city is not null)
 		{
-			var stateName =
-				city.State?.Name;
-
-			var countryName =
-				city.State?.Country?.Name;
+			var stateName = city.State?.Name;
+			var countryName = city.State?.Country?.Name;
 		}
 	}
 	// **************************************************
@@ -862,8 +849,7 @@ try
 
 		if (country is not null)
 		{
-			var stateCount =
-				country.States.Count;
+			var stateCount = country.States.Count;
 		}
 	}
 	// **************************************************
@@ -910,8 +896,8 @@ try
 	// C2		A2
 	// C2		B2
 	//
-	// Result:
-	// C1, C2 => OK
+	// Result for Solution (1) and Solution (2):
+	// [C1, C2] => OK
 	//
 	// BUT
 	// C1		A1
@@ -921,8 +907,11 @@ try
 	// C2		B3
 	// C2		B4
 	//
-	// Result:
-	// C1, C1, C2, C2 => NOT OK!
+	// Result for Solution (1):
+	// [C1, C2] = > OK
+	//
+	// Result for Solution (2):
+	// [C1, C1, C2, C2] => NOT OK!
 	// **************************************************
 
 	// **************************************************
@@ -940,7 +929,9 @@ try
 			// نيست
 			//.Include(current => current.States)
 			//.Include(current => current.States.Select(state => state.Cities))
-			.Where(current => current.States.Any(state => state.Cities.Any(city => city.Name.ToLower().Contains("B".ToLower()))))
+			.Where(current => current.States.Any
+				(state => state.Cities.Any
+				(city => city.Name.ToLower().Contains("B".ToLower()))))
 			.ToListAsync()
 			;
 	}

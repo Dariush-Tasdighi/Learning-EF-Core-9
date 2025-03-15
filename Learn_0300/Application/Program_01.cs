@@ -1,135 +1,152 @@
-﻿//using System;
-//using System.Linq;
-//using System.Collections.Generic;
-//using Microsoft.EntityFrameworkCore;
-//using System.ComponentModel.DataAnnotations;
-//using Microsoft.EntityFrameworkCore.ChangeTracking;
-//using System.ComponentModel.DataAnnotations.Schema;
-//using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-//try
-//{
-//	var roleName = $"Administrator";
+try
+{
+	var roleName = $"Administrator";
 
-//	{
-//		using var applicationDbContext = new ApplicationDbContext();
+	{
+		using var applicationDbContext = new ApplicationDbContext();
 
-//		var hasAnyRole =
-//			await
-//			applicationDbContext.Roles.AnyAsync();
+		var hasAnyRole =
+			await
+			applicationDbContext.Roles.AnyAsync();
 
-//		if (hasAnyRole == false)
-//		{
-//			var newRole = new Role(name: roleName);
+		if (hasAnyRole == false)
+		{
+			var newRole = new Role(name: roleName);
 
-//			applicationDbContext.Add(entity: newRole);
+			applicationDbContext.Add(entity: newRole);
 
-//			await applicationDbContext.SaveChangesAsync();
-//		}
-//	}
+			await applicationDbContext.SaveChangesAsync();
+		}
+	}
 
-//	{
-//		using var applicationDbContext = new ApplicationDbContext();
+	{
+		using var applicationDbContext = new ApplicationDbContext();
 
-//		var foundRole =
-//			await
-//			applicationDbContext.Roles
-//			.Where(current => current.Name.ToLower() == roleName.ToLower())
-//			.FirstOrDefaultAsync();
+		var foundRole =
+			await
+			applicationDbContext.Roles
+			.Where(current => current.Name.ToLower() == roleName.ToLower())
+			.FirstOrDefaultAsync();
 
-//		if (foundRole is null)
-//		{
-//			var errorMessage = $"{roleName} role not found!";
-//			Console.WriteLine(value: errorMessage);
-//			return;
-//		}
+		if (foundRole is null)
+		{
+			var errorMessage = $"{roleName} role not found!";
+			Console.WriteLine(value: errorMessage);
+			return;
+		}
 
-//		var hasAnyUser =
-//			await
-//			applicationDbContext.Users.AnyAsync();
+		var hasAnyUser =
+			await
+			applicationDbContext.Users.AnyAsync();
 
-//		if (hasAnyUser)
-//		{
-//			Console.WriteLine(value: $"The users has been already created!");
-//			return;
-//		}
+		if (hasAnyUser)
+		{
+			Console.WriteLine(value: $"The users has been already created!");
+			return;
+		}
 
-//		// **************************************************
-//		// ایجاد کاربر، به سه حالت مختلف
-//		// **************************************************
-//		User newUser;
-//		EntityEntry entityEntry;
+		// **************************************************
+		// ایجاد کاربر، به سه حالت مختلف
+		// **************************************************
+		User newUser;
+		EntityEntry entityEntry;
 
-//		// Solution (1)
-//		newUser =
-//			new User(username: "User1")
-//			{
-//				RoleId = foundRole.Id,
-//			};
+		// Solution (1)
+		newUser =
+			new User(username: "User1")
+			{
+				RoleId = foundRole.Id,
+			};
 
-//		entityEntry = applicationDbContext.Add(entity: newUser);
-//		// /Solution (1)
+		entityEntry = applicationDbContext.Add(entity: newUser);
+		// /Solution (1)
 
-//		// Solution (2)
-//		newUser =
-//			new User(username: "User2")
-//			{
-//				Role = foundRole,
-//			};
+		// Solution (2)
+		newUser =
+			new User(username: "User2")
+			{
+				Role = foundRole,
+			};
 
-//		entityEntry = applicationDbContext.Add(entity: newUser);
-//		// /Solution (2)
+		entityEntry = applicationDbContext.Add(entity: newUser);
+		// /Solution (2)
 
-//		// Solution (3)
-//		newUser =
-//			new User(username: "User3");
+		// Solution (3)
+		newUser =
+			new User(username: "User3");
 
-//		foundRole.Users.Add(item: newUser);
-//		// /Solution (3)
+		foundRole.Users.Add(item: newUser);
+		// /Solution (3)
 
-//		var affectedRows =
-//			await
-//			applicationDbContext.SaveChangesAsync();
+		var affectedRows =
+			await
+			applicationDbContext.SaveChangesAsync();
 
-//		Console.WriteLine(value: $"{nameof(affectedRows)}: {affectedRows}");
-//		// **************************************************
-//	}
-//}
-//catch (Exception ex)
-//{
-//	Console.WriteLine(value: ex.Message);
-//}
+		Console.WriteLine(value: $"{nameof(affectedRows)}: {affectedRows}");
+		// **************************************************
+	}
+}
+catch (Exception ex)
+{
+	Console.WriteLine(value: ex.Message);
+}
 
-//public abstract class Entity : object
-//{
-//	protected Entity() : base()
-//	{
-//	}
+public abstract class Entity : object
+{
+	protected Entity() : base()
+	{
+	}
 
-//	[Key]
-//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; init; } = Guid.NewGuid();
+	[Key]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+	public Guid Id { get; init; } = Guid.NewGuid();
 
-//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
-//}
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+	public DateTimeOffset InsertDateTime { get; init; } = DateTimeOffset.Now;
+}
 
-//public class Role(string name) : Entity
-//{
-//	[MaxLength(length: 50)]
-//	[Required(AllowEmptyStrings = false)]
-//	public string Name { get; set; } = name;
+public class Role(string name) : Entity
+{
+	[MaxLength(length: 50)]
+	[Required(AllowEmptyStrings = false)]
+	public string Name { get; set; } = name;
 
-//	//public virtual IList<User>? Users { get; set; } // Bad Practice!
-//	//public virtual IList<User>? Users { get; } // Bad Practice!
-//	//public virtual IList<User> Users { get; } = new List<User>();
-//	public virtual IList<User> Users { get; } = []; // Best Practice
-//}
+	//public virtual IList<User>? Users { get; set; } // Bad Practice!
+	//public virtual IList<User>? Users { get; } // Bad Practice!
+	//public virtual IList<User> Users { get; } = new List<User>();
+	public virtual IList<User> Users { get; } = []; // Best Practice
+}
 
-//public class User(string username) : Entity
+public class User(string username) : Entity
+{
+	[Required]
+	public Guid RoleId { get; set; }
+
+	public virtual Role? Role { get; set; }
+
+	[MaxLength(length: 20)]
+	[Required(AllowEmptyStrings = false)]
+	public string Username { get; set; } = username;
+}
+
+/// <summary>
+/// روش اصولی به شکل ذیل است، ولی اگر به شکل ذیل
+/// بنویسیم، هر سه حالت باحالی که در قسمت بالای سورس‌کد
+/// نوشته‌ایم، کار نخواهند کرد
+/// </summary>
+//public class User(Guid roleId, string username) : Entity
 //{
 //	[Required]
-//	public Guid RoleId { get; set; }
+//	public Guid RoleId { get; set; } = roleId;
 
 //	public virtual Role? Role { get; set; }
 
@@ -138,93 +155,76 @@
 //	public string Username { get; set; } = username;
 //}
 
-///// <summary>
-///// روش اصولی به شکل ذیل است، ولی اگر به شکل ذیل
-///// بنویسیم، هر سه حالت باحالی که در قسمت بالای سورس‌کد
-///// نوشته‌ایم، کار نخواهند کرد
-///// </summary>
-////public class User(Guid roleId, string username) : Entity
-////{
-////	[Required]
-////	public Guid RoleId { get; set; } = roleId;
+internal class RoleConfiguration : object, IEntityTypeConfiguration<Role>
+{
+	public RoleConfiguration() : base()
+	{
+	}
 
-////	public virtual Role? Role { get; set; }
+	public void Configure(EntityTypeBuilder<Role> builder)
+	{
+		builder
+			.HasKey(current => current.Id)
+			.IsClustered(clustered: false)
+			;
 
-////	[MaxLength(length: 20)]
-////	[Required(AllowEmptyStrings = false)]
-////	public string Username { get; set; } = username;
-////}
+		// Alternate Key
+		builder
+			.HasIndex(current => new { current.Name })
+			.IsUnique(unique: true)
+			;
+	}
+}
 
-//internal class RoleConfiguration : object, IEntityTypeConfiguration<Role>
-//{
-//	public RoleConfiguration() : base()
-//	{
-//	}
+internal class UserConfiguration : object, IEntityTypeConfiguration<User>
+{
+	public UserConfiguration() : base()
+	{
+	}
 
-//	public void Configure(EntityTypeBuilder<Role> builder)
-//	{
-//		builder
-//			.HasKey(current => current.Id)
-//			.IsClustered(clustered: false)
-//			;
+	public void Configure(EntityTypeBuilder<User> builder)
+	{
+		builder
+			.HasKey(current => current.Id)
+			.IsClustered(clustered: false)
+			;
 
-//		// Alternate Key
-//		builder
-//			.HasIndex(current => new { current.Name })
-//			.IsUnique(unique: true)
-//			;
-//	}
-//}
+		builder
+			.Property(current => current.Username)
+			.IsUnicode(unicode: false)
+			;
 
-//internal class UserConfiguration : object, IEntityTypeConfiguration<User>
-//{
-//	public UserConfiguration() : base()
-//	{
-//	}
+		// Alternate Key
+		builder
+			.HasIndex(current => new { current.Username })
+			.IsUnique(unique: true)
+			;
+	}
+}
 
-//	public void Configure(EntityTypeBuilder<User> builder)
-//	{
-//		builder
-//			.HasKey(current => current.Id)
-//			.IsClustered(clustered: false)
-//			;
+public class ApplicationDbContext : DbContext
+{
+	public ApplicationDbContext() : base()
+	{
+		Database.EnsureCreated();
+	}
 
-//		builder
-//			.Property(current => current.Username)
-//			.IsUnicode(unicode: false)
-//			;
+	public DbSet<Role> Roles { get; set; }
+	public DbSet<User> Users { get; set; }
 
-//		// Alternate Key
-//		builder
-//			.HasIndex(current => new { current.Username })
-//			.IsUnique(unique: true)
-//			;
-//	}
-//}
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		var connectionString =
+			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//public class ApplicationDbContext : DbContext
-//{
-//	public ApplicationDbContext() : base()
-//	{
-//		Database.EnsureCreated();
-//	}
+		optionsBuilder
+			.UseSqlServer(connectionString: connectionString)
+			;
+	}
 
-//	public DbSet<Role> Roles { get; set; }
-//	public DbSet<User> Users { get; set; }
-
-//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//	{
-//		var connectionString =
-//			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
-
-//		optionsBuilder
-//			.UseSqlServer(connectionString: connectionString)
-//			;
-//	}
-
-//	protected override void OnModelCreating(ModelBuilder modelBuilder)
-//	{
-//		modelBuilder.ApplyConfigurationsFromAssembly
-//			(assembly: typeof(ApplicationDbContext).Assembly);
-//	}
-//}
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.ApplyConfigurationsFromAssembly
+			(assembly: typeof(ApplicationDbContext).Assembly);
+	}
+}

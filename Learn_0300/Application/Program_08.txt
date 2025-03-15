@@ -1,1 +1,67 @@
-﻿Lazy Loading!
+﻿**************************************************
+Lazy Loading!
+
+- Lazy Loading is inactive!
+
+	(1)
+
+	var foundRole =
+		await
+		applicationDbContext.Roles
+		.Where(current => current.Name.ToLower() == roleName.ToLower())
+		.FirstOrDefaultAsync();
+
+	var userCount = foundRole.Users.Count; // 0
+
+	(2)
+
+	var foundRole =
+		await
+		applicationDbContext.Roles
+		.Include(current => current.Users)
+		.Where(current => current.Name.ToLower() == roleName.ToLower())
+		.FirstOrDefaultAsync();
+
+	var userCount = foundRole.Users.Count; // 100
+
+- Lazy Loading is active!
+
+	(3)
+
+	var foundRole =
+		await
+		applicationDbContext.Roles
+		.Where(current => current.Name.ToLower() == roleName.ToLower())
+		.FirstOrDefaultAsync();
+
+	var userCount = foundRole.Users.Count; // 100
+
+	(4)
+
+	var foundRole =
+		await
+		applicationDbContext.Roles
+		.Include(current => current.Users)
+		.Where(current => current.Name.ToLower() == roleName.ToLower())
+		.FirstOrDefaultAsync();
+
+	var userCount = foundRole.Users.Count; // 100
+**************************************************
+
+**************************************************
+void DoSomething(...)
+{
+}
+
+Googooli DoSomething(...)
+{
+}
+
+Task DoSomethingAsync(...)
+{
+}
+
+Task<Googooli> DoSomethingAysnc(...)
+{
+}
+**************************************************
